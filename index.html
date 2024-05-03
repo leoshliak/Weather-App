@@ -5,12 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="imgs/icon.png">
+    <script src="https://kit.fontawesome.com/ce1faa7116.js" crossorigin="anonymous"></script>
     <title>Weather App</title>
 </head>
 <body>
     <div class="container">
-       <div class="current"></div>
+        <div class="wrapper">
+            <div class="current">
+            <div class="weather-info left">
+       <p class="city"></p>
+        <div class="temperature"><i class="fa-solid fa-temperature-high"></i><p class="temperature-text"></p></div>
+        <div class="condition">
+       <p class="condition-text"></p>
+       <img  class="condition-icon" src=""  alt="" >
+    </div>
+       <p class="date-and-time"></p>
+       <label for=""><input type="text" placeholder="Enter location"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></label>
+    </div>
+       <div class="weather-info right">
+        <div class="weather-block">
+            <div class="weather-icon"><i class="fa-solid fa-temperature-half" style="color: #ffffff;"></i></div>
+            <div class="weather-text">
+                <p class="w-title">Feels like:</p>
+                <p class="w-text feels-like"></p>
+            </div>
+        </div>
+        <div class="weather-block">
+            <div class="weather-icon"><img src="/dist/imgs/icons8-humidity-50.png" alt=""></div>
+            <div class="weather-text">
+                <p class="w-title">Humidity:</p>
+                <p class="w-text current-humidity"></p>
+            </div>
+        </div>
+        <div class="weather-block">
+            <div class="weather-icon"><i class="fa-solid fa-cloud-rain" style="color: #ffffff;"></i></div>
+            <div class="weather-text">
+                <p class="w-title">Chance of rain:</p>
+                <p class="w-text chance"></p>
+            </div>
+        </div>
+        <div class="weather-block">
+            <div class="weather-icon"><i class="fa-solid fa-wind" style="color: #ffffff;"></i></div>
+            <div class="weather-text">
+                <p class="w-title">Wind speed:</p>
+                <p class="w-text wind-speed"></p>
+            </div>
+        </div>
+       </div>
+    </div>
        <div class="forecast"></div>
+        </div>
     </div>
 
     <script src="main.js"></script>
