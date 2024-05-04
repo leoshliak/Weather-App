@@ -4,7 +4,8 @@ const cytyTitle = document.querySelector('.city');
 const currentTemp = document.querySelector('.temperature-text');
 const conditionTeext = document.querySelector('.condition-text');
 const conditionImg = document.querySelector('.condition-icon');
-const dateAndTime = document.querySelector('.date-and-time');
+const pDate = document.querySelector('.date');
+const pTime = document.querySelector('.time');
 const inputSearch = document.querySelector('input');
 const searchIcon = document.querySelector('.fa-magnifying-glass');
 const feelsLike = document.querySelector('.feels-like');
@@ -16,17 +17,20 @@ async function getCurrentData(){
     let response = await fetch('http://api.weatherapi.com/v1/current.json?key=ac6ebdd86e3c4646807110042242304&q=kyiv', {mode: 'cors'});
     const currentData = await response.json();
     console.log(currentData);
-    let dBrT = currentData.location.localtime.replace(/\s/g, "<br>");
+    let currentDate = currentData.location.localtime.substring(0 , 10);
+    let currentTime = currentData.location.localtime.substring(11 , 16);
+    const formattedDate = formatDate(currentDate);
     //changeBackground(currentData.current.condition.text);
     cytyTitle.textContent = currentData.location.name;
-    currentTemp.textContent = `${currentData.current.temp_c} °C`;
+    currentTemp.innerHTML = `${currentData.current.temp_c} <span>°C</span>`;
     conditionTeext.textContent = currentData.current.condition.text;
     conditionImg.setAttribute('src', currentData.current.condition.icon);
-    dateAndTime.innerHTML = dBrT;
+    pDate.textContent = formattedDate;
+    pTime.textContent = currentTime;
     feelsLike.textContent = `${currentData.current.feelslike_c} °C`;
     humidity.textContent = `${currentData.current.humidity} %`;
     windSpeed.textContent = `${currentData.current.wind_kph} km/h`;
-    
+    pon();
 }
 
 getCurrentData();
@@ -35,10 +39,10 @@ getCurrentData();
     let response = await fetch(' http://api.weatherapi.com/v1/forecast.json?key=ac6ebdd86e3c4646807110042242304&q=kyiv', {mode: 'cors'});
     const currentData = await response.json();
     console.log(currentData);
-    rainChance.textContent = `${currentData.forecast.forecastday[0].hour[0].chance_of_rain} %`;
+    rainChance.textContent = `${currentData.forecast.forecastday[0].day.daily_chance_of_rain} %`;
  }
 
-pon();
+
 
 async function searchCurrentData() {
     if (inputSearch.value === '') return;
@@ -60,8 +64,11 @@ async function searchCurrentData() {
             alert('Location not found.');
         } else {
             //changeBackground(currentData.current.condition.text);
-            let dBrT = currentData.location.localtime.replace(/\s/g, "<br>");
             console.log(currentData);
+            let currentDate = currentData.location.localtime.substring(0 , 10);
+            let currentTime = currentData.location.localtime.substring(11 , 16);
+            const formattedDate = formatDate(currentDate);
+            
            // img.setAttribute('src', currentData.current.condition.icon);
            if( currentData.location.name == 'Dnepropetrovsk'){
             cytyTitle.textContent = 'Dnipro';
@@ -74,7 +81,8 @@ async function searchCurrentData() {
            currentTemp.textContent = `${currentData.current.temp_c} °C`;
            conditionTeext.textContent = currentData.current.condition.text;
            conditionImg.setAttribute('src', currentData.current.condition.icon);
-           dateAndTime.innerHTML = dBrT;
+           pDate.textContent = formattedDate;
+           pTime.textContent = currentTime;
            feelsLike.textContent = `${currentData.current.feelslike_c} °C`;
            humidity.textContent = `${currentData.current.humidity} %`;
            windSpeed.textContent = `${currentData.current.wind_kph} km/h`;
@@ -103,3 +111,17 @@ inputSearch.addEventListener('keypress', (e) =>{
      searchCurrentData();
  }
 })
+
+function formatDate(dateString) {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    const [year, month, day] = dateString.split('-');
+    const date = new Date(year, month - 1, day);
+
+    const dayOfWeek = days[date.getDay()];
+    const dayOfMonth = date.getDate();
+    const monthName = months[date.getMonth()];
+
+    return `${dayOfWeek} ${dayOfMonth} ${monthName} ${year}`;
+}
