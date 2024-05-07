@@ -98,12 +98,12 @@ async function searchCurrentData() {
     }
 }
 
-/*function changeBackground(condition) {
+ /*function changeBackground(condition) {
     const imageName = condition.replace(/\s/g, "_") + ".jpg";
     body.style.background = `url(/dist/imgs/${imageName})`;
     body.style.backgroundRepeat = 'no-repeat';
     body.style.backgroundSize = 'cover';
-}*/
+ }*/
 
 searchIcon.addEventListener('click', searchCurrentData);
 inputSearch.addEventListener('keypress', (e) =>{
