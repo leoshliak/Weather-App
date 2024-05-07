@@ -164,7 +164,37 @@ input::placeholder{
 .w-text{
     font-size: 1.4rem;
     font-weight: 600;
-    letter-spacing: 1px;
     margin-left: 5px;
-    
+    letter-spacing: 1px;
 }
+
+.dayly{
+    display: flex;
+    align-items: center;
+    gap: 80px;
+   margin-bottom: -7px;
+}
+
+.dayly-div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.day{
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+}
+
+.d-temp{
+    font-size: 1.3rem;
+}
+
+
+.d-icon{
+    width: 70px;
+    height: 70px;
+    margin-top: -3px;
+
+}    
