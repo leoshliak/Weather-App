@@ -23,6 +23,15 @@ const afterTomorrowIcon = document.querySelector('#atomorrow-icon');
 const todayMinTemp = document.querySelector('#today-min-temp');
 const todayMaxTemp = document.querySelector('#today-max-temp');
 const todayIcon = document.querySelector('#today-icon');
+const switchD = document.querySelector('.switch-d');
+const switchH = document.querySelector('.switch-h');
+const daily = document.querySelector('.daily');
+const hourly = document.querySelector('.hourly');
+const Hnav = document.querySelector('.h-nav');
+const hourlyTimes = document.querySelectorAll('.h-time');
+const hLinks = document.querySelectorAll('.h-link');
+const hourlyTemps = document.querySelectorAll('.h-temp');
+const hourlyIcon = document.querySelectorAll('.h-icon');
 
 async function getCurrentData(){
     let response = await fetch('http://api.weatherapi.com/v1/current.json?key=ac6ebdd86e3c4646807110042242304&q=kyiv', {mode: 'cors'});
@@ -90,7 +99,43 @@ getCurrentData();
     afterTomorrowMaxTemp.textContent = `${afterTomorrowData.forecast.forecastday[0].day.maxtemp_c} °C`;
     afterTomorrowIcon.setAttribute('src', afterTomorrowData.forecast.forecastday[0].day.condition.icon);
 
+    let currentHour = parseInt(currentData.location.localtime.substring(11 , 13));
+    if (isNaN(currentHour)) {
+        currentHour = parseInt(currentData.location.localtime.substring(11 , 12));
+    }
     
+  hourlyTimes.forEach((element, index) =>{
+    if(currentHour + index <= 23){
+        if(currentHour + index < 10){
+            element.textContent = `0${currentHour + index}:00`
+         }else{
+            element.textContent = `${currentHour + index}:00`
+         }
+       
+    } else if(currentHour + index > 23){
+        if(currentHour + index - 24 < 10){
+            element.textContent = `0${currentHour + index - 24}:00`
+         }else{
+            element.textContent = `${currentHour + index - 24}:00`
+         } 
+     } 
+  });
+
+  hourlyTemps.forEach((element, index) =>{
+    if(currentHour + index <= 23){
+     element.textContent = `${currentData.forecast.forecastday[0].hour[currentHour + index].temp_c} °C`;
+    }else if(currentHour + index > 23){
+        element.textContent = `${tomorrowData.forecast.forecastday[0].hour[currentHour + index - 24].temp_c} °C`;
+    }
+  });
+
+  hourlyIcon.forEach((element, index) =>{
+    if(currentHour + index <= 23){
+        element.setAttribute('src', currentData.forecast.forecastday[0].hour[currentHour + index].condition.icon)
+       }else if(currentHour + index > 23){
+        element.setAttribute('src', tomorrowData.forecast.forecastday[0].hour[currentHour + index - 24].condition.icon);
+       }
+  });
  }
 
  pon();
@@ -111,6 +156,7 @@ async function searchCurrentData() {
          
         const tomorrowDateString = tomorrow.toISOString().split('T')[0];
         const afterTomorrowDateString = afterTomorrow.toISOString().split('T')[0];
+       
     
         let response = await fetch(`http://api.weatherapi.com/v1/current.json?key=ac6ebdd86e3c4646807110042242304&q=${finalReq}`, { mode: 'cors' });
         let response2 = await fetch(` http://api.weatherapi.com/v1/forecast.json?key=ac6ebdd86e3c4646807110042242304&q=${finalReq}`, {mode: 'cors'});
@@ -126,7 +172,11 @@ async function searchCurrentData() {
         const tomorrowData = await response3.json();
         const afterTomorrowData = await response4.json();
         console.log(currentData2);
-       
+        let currentHour = parseInt(currentData.location.localtime.substring(11 , 13));
+        if (isNaN(currentHour)) {
+            currentHour = parseInt(currentData.location.localtime.substring(11 , 12));
+        }
+        
         if (currentData.error) {
             alert('Location not found.');
         } else {
@@ -170,6 +220,40 @@ async function searchCurrentData() {
     afterTomorrowMinTemp.textContent = `${afterTomorrowData.forecast.forecastday[0].day.mintemp_c} °C`;
     afterTomorrowMaxTemp.textContent = `${afterTomorrowData.forecast.forecastday[0].day.maxtemp_c} °C`;
     afterTomorrowIcon.setAttribute('src', afterTomorrowData.forecast.forecastday[0].day.condition.icon);
+
+    hourlyTimes.forEach((element, index) =>{
+        if(currentHour + index <= 23){
+            if(currentHour + index < 10){
+                element.textContent = `0${currentHour + index}:00`
+             }else{
+                element.textContent = `${currentHour + index}:00`
+             }
+           
+        } else if(currentHour + index > 23){
+            if(currentHour + index - 24 < 10){
+                element.textContent = `0${currentHour + index - 24}:00`
+             }else{
+                element.textContent = `${currentHour + index - 24}:00`
+             } 
+         } 
+      });
+    
+      hourlyTemps.forEach((element, index) =>{
+        if(currentHour + index <= 23){
+         element.textContent = `${currentData2.forecast.forecastday[0].hour[currentHour + index].temp_c} °C`;
+        }else if(currentHour + index > 23){
+            element.textContent = `${tomorrowData.forecast.forecastday[0].hour[currentHour + index - 24].temp_c} °C`;
+        }
+      });
+    
+      hourlyIcon.forEach((element, index) =>{
+        if(currentHour + index <= 23){
+            element.setAttribute('src', currentData2.forecast.forecastday[0].hour[currentHour + index].condition.icon);
+           }else if(currentHour + index > 23){
+            element.setAttribute('src', tomorrowData.forecast.forecastday[0].hour[currentHour + index - 24].condition.icon);
+           }
+      });
+
            inputSearch.value = '';
         }
     } catch (error) {
@@ -218,3 +302,31 @@ function formatDate2(dateString){
 
     return `${dayOfMonth} ${monthName}`;
 }
+
+switchD.addEventListener('click', (e) =>{
+    //if(e.target.classList.contains('active'))return;
+    switchH.classList.remove('active');
+    e.target.classList.add('active');
+    hourly.style.display = 'none';
+    daily.style.display = 'flex';
+    Hnav.style.display = 'none';
+});
+
+switchH.addEventListener('click', (e) =>{
+    //if(e.target.classList.contains('active'))return;
+    switchD.classList.remove('active');
+    e.target.classList.add('active');
+    hourly.style.display = 'flex';
+    daily.style.display = 'none';
+    Hnav.style.display = 'flex';
+ });
+
+ window.addEventListener('click', (e) => {
+    if (e.target.classList.contains('h-link')) {
+        if (e.target.classList.contains('active')) return;
+        hLinks.forEach((link) => {
+            link.classList.remove('active');
+        })
+        e.target.classList.add('active');
+    }
+});

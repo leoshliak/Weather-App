@@ -37,11 +37,11 @@ body{
 .weather-info.left{
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
 }
 
 .city{
-    font-size: 3.5rem;
+    font-size: 3.3rem;
     letter-spacing: 1.2px;
     font-weight: 700;
 }
@@ -54,7 +54,7 @@ body{
 }
 
 .temperature-text{
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: 400;
     letter-spacing: 0.8px;
 }
@@ -69,7 +69,7 @@ body{
 }
 
 .condition-text{
-    font-size: 2.2rem;
+    font-size: 2.1rem;
 }
 
 
@@ -86,11 +86,11 @@ body{
 }
 
 .date{
-    font-size: 2.2rem;
+    font-size: 2.1rem;
 }
 
 .time{
-    font-size: 2rem;
+    font-size: 1.9rem;
     font-weight: 600;
     letter-spacing: 1px;
     margin-bottom: 5px;
@@ -168,27 +168,27 @@ input::placeholder{
     letter-spacing: 1px;
 }
 
-.dayly{
+.daily{
     display: flex;
     align-items: center;
     gap: 80px;
-   margin-bottom: -7px;
+   margin-bottom: -15px;
 }
 
-.dayly-div{
+.daily-div{
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
 .day{
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 800;
     letter-spacing: 0.8px;
 }
 
 .d-temp{
-    font-size: 1.3rem;
+    font-size: 1.2rem;
 }
 
 
@@ -196,5 +196,103 @@ input::placeholder{
     width: 70px;
     height: 70px;
     margin-top: -3px;
-
 }    
+
+.dh{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    
+}
+
+.dh > div{
+    text-transform: uppercase;
+    padding: 6px;
+    cursor: pointer;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+   border: 3px solid #fff;
+   transition: all 0.3s;
+}
+
+.switch-d.active,
+.switch-h.active{
+    color: #000;
+    background-color: #fff;
+}
+
+.dh  div:hover{
+    color: #000;
+    background-color: #fff;
+}
+
+.hourly{
+    display: none;
+    align-items: center;
+    gap: 80px;
+    margin-bottom: -16px;
+    overflow: hidden;
+    scroll-behavior: smooth;
+}
+
+.dhn{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 23%;
+    left: 60px;
+    width: 91%;
+}
+
+.h-nav{
+    display: none;
+    align-items: center;
+    gap: 10px;
+}
+
+.hourly-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   gap: 5px;
+   
+}
+
+.h-link{
+    position: relative;
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    transition: all 0.3s;
+    background-color: #fff;
+}
+
+.h-link.active {
+    width: 30px;
+    border-radius: 5px;
+}
+
+.h-row{
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    width: 100%;
+} 
+
+.h-time{
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.7px;
+}
+
+.h-temp{
+    font-size: 1.3rem;
+    white-space: nowrap;
+}
+
+.h-icon{
+    margin-top: -3px;
+}
