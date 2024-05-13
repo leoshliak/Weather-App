@@ -15,16 +15,21 @@
             <div class="weather-info left">
        <p class="city"></p>
        <p class="date"></p>
+       <div class="time-temp">
        <p class="time"></p>
        <div class="temperature"><img src="/dist/imgs/icons8-temperature-96.png" alt=""><p class="temperature-text"></p></div>
+       </div>
         <div class="condition">
        <p class="condition-text"></p>
        <img  class="condition-icon" src=""  alt="" >
     </div>
       
        <label for=""><input type="text" placeholder="Enter location"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></label>
+       <p class="not-found"></p>
     </div>
        <div class="weather-info right">
+        <div class="blocs">
+            <div class="two-blocks">
         <div class="weather-block">
             <div class="weather-icon"><i class="fa-solid fa-temperature-half" style="color: #ffffff;"></i></div>
             <div class="weather-text">
@@ -39,6 +44,8 @@
                 <p class="w-text current-humidity"></p>
             </div>
         </div>
+    </div>
+    <div class="two-blocks">
         <div class="weather-block">
             <div class="weather-icon"><i class="fa-solid fa-cloud-rain" style="color: #ffffff;"></i></div>
             <div class="weather-text">
@@ -53,6 +60,8 @@
                 <p class="w-text wind-speed"></p>
             </div>
         </div>
+    </div>
+    </div>
         <button class="cf-btn"><span class="active">°C</span><span style="opacity: 0.8;">/</span><span>°F</span></button>
        </div>
     </div>
@@ -65,7 +74,7 @@
         <div class="h-nav"><a href="#row-1" class="h-link active"><span ></span></a><a href="#row-2" class="h-link"><span></span></a><a href="#row-3" class="h-link"><span></span></a></div>
         </div>
         <div class="daily">
-                <div class="dayly-div">
+                <div class="daily-div">
                 <p class="day" id="today-date">Today</p>
                 <div class="d-temp">
                     <p><span id="today-min-temp"></span>  <span class="btw" style="opacity: 0.8;">/</span>  <span id="today-max-temp"></span></p>
@@ -73,7 +82,7 @@
                 </div>
                 <img src="" class="d-icon" id="today-icon" alt="">
             </div>
-            <div class="dayly-div">
+            <div class="daily-div">
                 <p class="day" id="tomorrow-date"></p>
                 <div class="d-temp">
                     <p><span id="tmin-temp"></span>  <span class="btw" style="opacity: 0.8;">/</span>  <span id="tmax-temp"></span></p>
@@ -81,7 +90,7 @@
                 </div>
                 <img src="" class="d-icon" id="tomorrow-icon" alt="">
             </div>
-            <div class="dayly-div">
+            <div class="daily-div">
                 <p class="day" id="atomorrow-date"></p>
                 <div class="d-temp">
                     <p><span id="atmin-temp"></span>  <span class="btw" style="opacity: 0.8;">/</span>  <span id="atmax-temp"></span></p>
