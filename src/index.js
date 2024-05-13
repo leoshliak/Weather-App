@@ -33,10 +33,11 @@ const hLinks = document.querySelectorAll('.h-link');
 const hourlyTemps = document.querySelectorAll('.h-temp');
 const hourlyIcon = document.querySelectorAll('.h-icon');
 const cfBtn = document.querySelector('.cf-btn');
-
+const notFound = document.querySelector('.not-found');
 let finalReq = 'kyiv';
 
 async function getCurrentData(){
+    try{
     let response = await fetch(`http://api.weatherapi.com/v1/current.json?key=ac6ebdd86e3c4646807110042242304&q=${finalReq}`, {mode: 'cors'});
     if(finalReq == 'dnepr' || finalReq == 'dnipro'){
         response = await fetch(`http://api.weatherapi.com/v1/current.json?key=ac6ebdd86e3c4646807110042242304&q=dnepropetrovsk`, { mode: 'cors' });
@@ -46,10 +47,15 @@ async function getCurrentData(){
     
     const currentData = await response.json();
     console.log(currentData);
-    let currentDate = currentData.location.localtime.substring(0 , 10);
-    let currentTime = currentData.location.localtime.substring(11 , 16);
-    const formattedDate = formatDate(currentDate);
+   
+   
     //changeBackground(currentData.current.condition.text);
+    if (currentData.error) {
+        notFound.textContent = currentData.error.message;
+    } else {
+        let currentDate = currentData.location.localtime.substring(0 , 10); 
+         const formattedDate = formatDate(currentDate);
+        let currentTime = currentData.location.localtime.substring(11 , 16);
     if( currentData.location.name == 'Dnepropetrovsk'){
         cytyTitle.textContent = 'Dnipro';
        }else if(currentData.location.name == 'Днепропетровск' || currentData.location.name == 'Дніпропетровськ'){
@@ -65,7 +71,8 @@ async function getCurrentData(){
     feelsLike.textContent = `${currentData.current.feelslike_c} °C`;
     humidity.textContent = `${currentData.current.humidity} %`;
     windSpeed.textContent = `${currentData.current.wind_kph} km/h`;
-
+    notFound.textContent = '';
+    await pon();
    function switchCurrentCF(){
     if(cfBtn.firstChild.classList.contains('active')){
         currentTemp.innerHTML = `${currentData.current.temp_c} <span>°C</span>`;
@@ -77,8 +84,15 @@ async function getCurrentData(){
         windSpeed.textContent = `${currentData.current.wind_mph} m/h`;
     }
   }
-
-    cfBtn.addEventListener('click', switchCurrentCF);
+      
+    cfBtn.addEventListener('click', switchCurrentCF);}
+} catch(error){
+        if (error instanceof TypeError && error.message === "Failed to fetch") {
+            alert('Network error. Please check your internet connection.');
+        } else {
+            console.error(error);
+        }
+    }
 }
 
 
@@ -86,6 +100,9 @@ async function getCurrentData(){
 getCurrentData();
 
  async function  pon(){
+    try{
+
+    
     let response = await fetch( `http://api.weatherapi.com/v1/forecast.json?key=ac6ebdd86e3c4646807110042242304&q=${finalReq}`, {mode: 'cors'});
     if(finalReq == 'dnepr' || finalReq == 'dnipro'){
         response = await fetch(`http://api.weatherapi.com/v1/current.json?key=ac6ebdd86e3c4646807110042242304&q=dnepropetrovsk`, { mode: 'cors' });
@@ -213,6 +230,13 @@ getCurrentData();
   }
 
   cfBtn.addEventListener('click', switchCF);
+}catch(error){
+    if (error instanceof TypeError && error.message === "Failed to fetch") {
+        alert('Network error. Please check your internet connection.');
+    } else {
+        console.error(error);
+    }
+}
  }
 
  
@@ -223,7 +247,6 @@ async function searchCurrentData() {
     if (inputSearch.value === '') return;
         finalReq = inputSearch.value.toLowerCase();
          getCurrentData();
-        pon();
         inputSearch.value = '';
        
 }
