@@ -7,6 +7,6 @@ Odin Project: Weather App
 
 ![image](https://github.com/leoshliak/Weather-App/assets/139138564/37c4adde-3f5d-4813-abb5-a7a67a20dbc8)
 
-                             ![image](https://github.com/leoshliak/Weather-App/assets/139138564/4f29a6fb-bd16-4956-8a6e-d67f37c0a117)
+   ![image](https://github.com/leoshliak/Weather-App/assets/139138564/4f29a6fb-bd16-4956-8a6e-d67f37c0a117)
 
-                            ![image](https://github.com/leoshliak/Weather-App/assets/139138564/c8209311-eb38-4015-988d-02bc3cdae819)
+   ![image](https://github.com/leoshliak/Weather-App/assets/139138564/c8209311-eb38-4015-988d-02bc3cdae819)
