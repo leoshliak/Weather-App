@@ -38,11 +38,11 @@ let finalReq = 'kyiv';
 
 async function getCurrentData(){
     try{
-    let response = await fetch(`http://api.weatherapi.com/v1/current.json?key=ac6ebdd86e3c4646807110042242304&q=${finalReq}`, {mode: 'cors'});
+    let response = await fetch(`https://api.weatherapi.com/v1/current.json?key=ac6ebdd86e3c4646807110042242304&q=${finalReq}`, {mode: 'cors'});
     if(finalReq == 'dnepr' || finalReq == 'dnipro'){
-        response = await fetch(`http://api.weatherapi.com/v1/current.json?key=ac6ebdd86e3c4646807110042242304&q=dnepropetrovsk`, { mode: 'cors' });
+        response = await fetch(`https://api.weatherapi.com/v1/current.json?key=ac6ebdd86e3c4646807110042242304&q=dnepropetrovsk`, { mode: 'cors' });
    }else if(finalReq == 'днепр' || finalReq == 'дніпро'){
-       response = await fetch(`http://api.weatherapi.com/v1/current.json?key=ac6ebdd86e3c4646807110042242304&q=dnepropetrovsk`, { mode: 'cors' });
+       response = await fetch(`https://api.weatherapi.com/v1/current.json?key=ac6ebdd86e3c4646807110042242304&q=dnepropetrovsk`, { mode: 'cors' });
    }
     
     const currentData = await response.json();
@@ -103,11 +103,11 @@ getCurrentData();
     try{
 
     
-    let response = await fetch( `http://api.weatherapi.com/v1/forecast.json?key=ac6ebdd86e3c4646807110042242304&q=${finalReq}`, {mode: 'cors'});
+    let response = await fetch( `https://api.weatherapi.com/v1/forecast.json?key=ac6ebdd86e3c4646807110042242304&q=${finalReq}`, {mode: 'cors'});
     if(finalReq == 'dnepr' || finalReq == 'dnipro'){
-        response = await fetch(`http://api.weatherapi.com/v1/current.json?key=ac6ebdd86e3c4646807110042242304&q=dnepropetrovsk`, { mode: 'cors' });
+        response = await fetch(`https://api.weatherapi.com/v1/current.json?key=ac6ebdd86e3c4646807110042242304&q=dnepropetrovsk`, { mode: 'cors' });
    }else if(finalReq == 'днепр' || finalReq == 'дніпро'){
-       response = await fetch(`http://api.weatherapi.com/v1/current.json?key=ac6ebdd86e3c4646807110042242304&q=dnepropetrovsk`, { mode: 'cors' });
+       response = await fetch(`https://api.weatherapi.com/v1/current.json?key=ac6ebdd86e3c4646807110042242304&q=dnepropetrovsk`, { mode: 'cors' });
    }
     const currentData = await response.json();
     console.log(currentData);
@@ -125,9 +125,9 @@ getCurrentData();
     const tomorrowDateString = tomorrow.toISOString().split('T')[0];
     const afterTomorrowDateString = afterTomorrow.toISOString().split('T')[0];
 
-    response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=ac6ebdd86e3c4646807110042242304&q=kyiv&dt=${tomorrowDateString}`, {mode: 'cors'});
+    response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=ac6ebdd86e3c4646807110042242304&q=${finalReq}&dt=${tomorrowDateString}`, {mode: 'cors'});
     const tomorrowData = await response.json();
-    response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=ac6ebdd86e3c4646807110042242304&q=kyiv&dt=${afterTomorrowDateString}`, {mode: 'cors'});
+    response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=ac6ebdd86e3c4646807110042242304&q=${finalReq}&dt=${afterTomorrowDateString}`, {mode: 'cors'});
     const afterTomorrowData = await response.json();
 
     console.log("Tomorrow:", tomorrowData);
